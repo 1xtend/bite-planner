@@ -8,6 +8,7 @@ import { LocalStorage } from '../../shared/models/enums/local-storage.enum';
 })
 export class ThemeService {
   private themeSubject = new Subject<Theme>();
+  theme$ = this.themeSubject.asObservable();
 
   constructor() {
   }
