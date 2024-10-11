@@ -14,5 +14,5 @@ import { ButtonModule } from 'primeng/button';
 export class IconButtonComponent {
   icon = input.required<string>();
 
-  onClick = output<MouseEvent>()
+  onClick = output<MouseEvent>();
 }

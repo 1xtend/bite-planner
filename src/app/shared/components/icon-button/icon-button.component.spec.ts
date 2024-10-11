@@ -10,10 +10,12 @@ describe('IconButtonComponent', () => {
     await TestBed.configureTestingModule({
       imports: [IconButtonComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(IconButtonComponent);
+    fixture.componentRef.setInput('icon', 'pi pi-cog');
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
