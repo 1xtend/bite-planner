@@ -1,2 +1,14 @@
 @import "primeicons/primeicons.css";
 @import 'primeflex/primeflex.css';
+@import './assets/styles/reset';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+.main {
+  flex-grow: 1;
+}
