@@ -1,0 +1,11 @@
+:host {
+  ::ng-deep {
+    .p-button {
+      padding: var(--spacing-xs);
+    }
+
+    .p-button-label {
+      font-size: var(--heading-1)
+    }
+  }
+}
