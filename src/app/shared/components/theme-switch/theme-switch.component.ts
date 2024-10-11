@@ -15,7 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class ThemeSwitchComponent {
   private themeService = inject(ThemeService);
-  private currentTheme = toSignal(this.themeService.theme$);
+  currentTheme = toSignal(this.themeService.theme$);
 
   toggle(): void {
     const theme = this.currentTheme() === 'dark' ? 'light' : 'dark';
