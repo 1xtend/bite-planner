@@ -10,9 +10,6 @@ export class ThemeService {
   private themeSubject = new Subject<Theme>();
   theme$ = this.themeSubject.asObservable();
 
-  constructor() {
-  }
-
   setTheme(theme: Theme): void {
     const linkEl = document.getElementById('app-theme') as HTMLLinkElement | null;
     if (!linkEl) {
