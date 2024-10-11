@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+  place-items: center;
+  flex-grow: 1;
+
+  .box {
+    text-align: center;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-s);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+:host {
+  ::ng-deep {
+    .icon-button {
+      width: auto;
+      padding: 0.5rem;
+    }
+
+    .p-button-icon {
+      font-size: 1.25rem;
+    }
+  }
+}

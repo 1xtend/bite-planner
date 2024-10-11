@@ -1,0 +1,16 @@
+:host {
+  .header {
+    background-color: var(--surface-ground);
+    padding: var(--spacing-xs) var(--spacing-s);
+    border-bottom: 1px solid var(--surface-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-s);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--spacing-s);
+  }
+}
