@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -8,7 +8,8 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule
   ],
   templateUrl: './icon-button.component.html',
-  styleUrl: './icon-button.component.scss'
+  styleUrl: './icon-button.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconButtonComponent {
   icon = input.required<string>();
