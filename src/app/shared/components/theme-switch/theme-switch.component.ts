@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 @Component({
@@ -8,7 +8,8 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
     IconButtonComponent
   ],
   templateUrl: './theme-switch.component.html',
-  styleUrl: './theme-switch.component.scss'
+  styleUrl: './theme-switch.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThemeSwitchComponent {
   toggle(): void {

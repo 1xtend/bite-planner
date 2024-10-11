@@ -1,4 +1,9 @@
 {
+  "404": {
+    "oops": "Oops",
+    "page-not-found": "Page not found",
+    "body": "It seems you've wandered into the endless realms of the internet. Don't worry! It happens to everyone."
+  },
   "nav": {
     "home": "Home"
   }
