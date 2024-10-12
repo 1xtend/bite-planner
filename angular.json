@@ -34,13 +34,13 @@
               "node_modules/primeng/resources/primeng.min.css",
               {
                 "inject": false,
-                "input": "src/assets/styles/themes/lara-dark-green.scss",
-                "bundleName": "lara-dark-green"
+                "input": "src/assets/styles/themes/saga-green.scss",
+                "bundleName": "saga-green"
               },
               {
                 "inject": false,
-                "input": "src/assets/styles/themes/lara-light-green.scss",
-                "bundleName": "lara-light-green"
+                "input": "src/assets/styles/themes/arya-green.scss",
+                "bundleName": "arya-green"
               }
             ],
             "scripts": []
