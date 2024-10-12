@@ -4,6 +4,10 @@
     "page-not-found": "Page not found",
     "body": "It seems you've wandered into the endless realms of the internet. Don't worry! It happens to everyone."
   },
+  "tooltip": {
+    "switch-dark-theme": "Switch to dark theme",
+    "switch-light-theme": "Switch to light theme"
+  },
   "nav": {
     "home": "Home"
   }
