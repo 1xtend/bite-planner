@@ -19,9 +19,9 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ThemeSwitchComponent {
   private themeService = inject(ThemeService);
-  currentTheme = toSignal(this.themeService.theme$);
+  private currentTheme = toSignal(this.themeService.theme$);
   icon = computed<string>(() => this.currentTheme() === 'light' ? 'pi pi-moon' : 'pi pi-sun');
-  tooltip = computed<string>(() => `tooltip.switch-${ this.currentTheme() }-theme`);
+  tooltip = computed<string>(() => `tooltip.switch-${ this.currentTheme() === 'dark' ? 'light' : 'dark' }-theme`);
 
   toggle(): void {
     const theme = this.currentTheme() === 'dark' ? 'light' : 'dark';
