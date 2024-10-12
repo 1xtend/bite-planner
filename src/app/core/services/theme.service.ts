@@ -16,7 +16,7 @@ export class ThemeService {
       throw new Error('There is no "app-theme" element on the page.');
     }
 
-    linkEl.href = `lara-${ theme }-green.css`;
+    linkEl.href = `${ theme === 'dark' ? 'arya' : 'saga' }-green.css`;
     localStorage.setItem(LocalStorage.Theme, theme);
     this.themeSubject.next(theme);
   }
