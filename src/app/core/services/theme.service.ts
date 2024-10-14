@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { startWith, Subject } from 'rxjs';
 import { Theme } from '../../shared/models/types/theme.type';
 import { LocalStorage } from '../../shared/models/enums/local-storage.enum';
 
@@ -16,7 +16,7 @@ export class ThemeService {
       throw new Error('There is no "app-theme" element on the page.');
     }
 
-    linkEl.href = `${ theme === 'dark' ? 'arya' : 'saga' }-green.css`;
+    linkEl.href = `${ theme }.css`;
     localStorage.setItem(LocalStorage.Theme, theme);
     this.themeSubject.next(theme);
   }
