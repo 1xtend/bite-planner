@@ -17,15 +17,11 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './theme-switch.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ThemeSwitchComponent implements OnInit {
+export class ThemeSwitchComponent {
   private themeService = inject(ThemeService);
   private currentTheme = toSignal(this.themeService.theme$);
   icon = computed<string>(() => this.currentTheme() === 'light' ? 'pi pi-moon' : 'pi pi-sun');
   tooltip = computed<string>(() => `tooltip.switch-${ this.currentTheme() === 'dark' ? 'light' : 'dark' }-theme`);
-
-  ngOnInit(): void {
-
-  }
 
   toggle(): void {
     const theme = this.currentTheme() === 'dark' ? 'light' : 'dark';
