@@ -1,6 +1,4 @@
-//$primaryColor: #B0B3B8 !default; // Alternative 1
-//$primaryColor: #B7B09C !default; // Alternative 2
-$primaryColor: #8a7e78 !default; // Default
+$primaryColor: #839a71 !default; // Edited
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
@@ -31,10 +29,10 @@ $shade100: rgba(255, 255, 255, 0.6) !default; //text secondary color
 $shade600: #383838 !default; //input bg, border, divider
 $shade500: #464646 !default;
 $shade700: #2b2b2b !default; //unused
-$shade800: #000000 !default; //elevated surface
+$shade800: #1e1e1e !default; //elevated surface
 $shade900: #121212 !default; //ground surface
 
-$hoverBg: rgba(255, 255, 255, 0.1) !default;
+$hoverBg: rgba(255, 255, 255, 0.03) !default;
 
 //global
 $fontFamily: 'Roboto Mono' !default;
@@ -42,13 +40,12 @@ $fontSize: 1rem !default;
 $fontWeight: normal !default;
 $textColor: $shade000 !default;
 $textSecondaryColor: $shade100 !default;
-$borderRadius: 0 !default;
+$borderRadius: 0 !default; // Edited
 $transitionDuration: 0.2s !default;
 $formElementTransition: background-color $transitionDuration,
 color $transitionDuration, border-color $transitionDuration,
 box-shadow $transitionDuration !default;
-$actionIconTransition: background-color $transitionDuration,
-color $transitionDuration, box-shadow $transitionDuration !default;
+$actionIconTransition: background-color $transitionDuration, d color $transitionDuration, box-shadow $transitionDuration !default;
 $listItemTransition: box-shadow $transitionDuration !default;
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $shade600 !default;
@@ -944,9 +941,9 @@ $imagePreviewActionIconBorderRadius: 50% !default;
   --content-padding: #{$panelContentPadding};
   --inline-spacing: #{$inlineSpacing};
   --border-radius: #{$borderRadius};
-  --surface-ground: #1e1e1e;
-  --surface-section: #131313;
-  --surface-card: #{$shade800};
+  --surface-ground: #121212;
+  --surface-section: #121212;
+  --surface-card: #1e1e1e;
   --surface-overlay: #1e1e1e;
   --surface-border: #383838;
   --surface-hover: rgba(255, 255, 255, 0.03);

@@ -6,57 +6,58 @@
   </main>
 
   <!--  <footer class="footer">footer</footer>-->
+  <div class="p-5">
+    <p-menubar [model]="options">
+      <ng-template pTemplate="end">
+        <app-theme-switch></app-theme-switch>
+      </ng-template>
+    </p-menubar>
+
+    <br>
+
+    <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
+      <ng-template pTemplate="header">
+        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"/>
+      </ng-template>
+      <p>
+        Lorem ipsum dolor sit amet...
+      </p>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button label="Cancel" class="w-full" styleClass="w-full"/>
+          <p-button label="Save" class="w-full" styleClass="w-full"/>
+        </div>
+      </ng-template>
+    </p-card>
+    <br>
+
+    <div class="flex gap-3">
+      <p-button label="Test 1"></p-button>
+      <p-button label="test 2" [outlined]="true"></p-button>
+      <p-button label="test 3" severity="secondary"></p-button>
+    </div>
+
+    <br>
+    <p-dropdown [options]="options" optionLabel="label" class="min-w-5rem"></p-dropdown>
+    <br>
+    <br>
+    <div>
+      <p-checkbox [binary]="true"></p-checkbox>
+    </div>
+    <br>
+    <div>
+      <input pInputText placeholder="Enter text"/>
+    </div>
+    <br>
+    <div>
+      <textarea pInputTextarea [autoResize]="true" [(ngModel)]="text"></textarea>
+    </div>
+    <br>
+    <div>
+      <p-inputSwitch></p-inputSwitch>
+    </div>
+
+  </div>
 </div>
 
-<!--<div class="p-5">-->
-<!--  <p-menubar [model]="options">-->
-<!--    <ng-template pTemplate="end">-->
-<!--      <app-theme-switch></app-theme-switch>-->
-<!--    </ng-template>-->
-<!--  </p-menubar>-->
 
-<!--  <br>-->
-
-<!--  <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">-->
-<!--    <ng-template pTemplate="header">-->
-<!--      <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"/>-->
-<!--    </ng-template>-->
-<!--    <p>-->
-<!--      Lorem ipsum dolor sit amet...-->
-<!--    </p>-->
-<!--    <ng-template pTemplate="footer">-->
-<!--      <div class="flex gap-3 mt-1">-->
-<!--        <p-button label="Cancel" class="w-full" styleClass="w-full"/>-->
-<!--        <p-button label="Save" class="w-full" styleClass="w-full"/>-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--  </p-card>-->
-<!--  <br>-->
-
-<!--  <div class="flex gap-3">-->
-<!--    <p-button label="Test 1"></p-button>-->
-<!--    <p-button label="test 2" [outlined]="true"></p-button>-->
-<!--    <p-button label="test 3" severity="secondary"></p-button>-->
-<!--  </div>-->
-
-<!--  <br>-->
-<!--  <p-dropdown [options]="options" optionLabel="label" class="min-w-5rem"></p-dropdown>-->
-<!--  <br>-->
-<!--  <br>-->
-<!--  <div>-->
-<!--    <p-checkbox [binary]="true"></p-checkbox>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--  <div>-->
-<!--    <input pInputText placeholder="Enter text"/>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--  <div>-->
-<!--    <textarea pInputTextarea [autoResize]="true" [(ngModel)]="text"></textarea>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--  <div>-->
-<!--    <p-inputSwitch></p-inputSwitch>-->
-<!--  </div>-->
-
-<!--</div>-->
