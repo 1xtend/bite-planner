@@ -1,4 +1,4 @@
-$primaryColor: #839a71 !default; // Edited
+$primaryColor: #839a71 !default;
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
@@ -40,12 +40,13 @@ $fontSize: 1rem !default;
 $fontWeight: normal !default;
 $textColor: $shade000 !default;
 $textSecondaryColor: $shade100 !default;
-$borderRadius: 0 !default; // Edited
+$borderRadius: 0 !default;
 $transitionDuration: 0.2s !default;
 $formElementTransition: background-color $transitionDuration,
 color $transitionDuration, border-color $transitionDuration,
 box-shadow $transitionDuration !default;
-$actionIconTransition: background-color $transitionDuration, d color $transitionDuration, box-shadow $transitionDuration !default;
+$actionIconTransition: background-color $transitionDuration,
+color $transitionDuration, box-shadow $transitionDuration !default;
 $listItemTransition: box-shadow $transitionDuration !default;
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $shade600 !default;

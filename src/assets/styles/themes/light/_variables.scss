@@ -1,4 +1,4 @@
-$primaryColor: #5c7650 !default; // Edited
+$primaryColor: #5c7650 !default;
 $primaryLightColor: scale-color($primaryColor, $lightness: 60%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
@@ -41,7 +41,7 @@ $fontSize: 1rem !default;
 $fontWeight: normal !default;
 $textColor: $shade700 !default;
 $textSecondaryColor: $shade600 !default;
-$borderRadius: 0 !default; // Edited
+$borderRadius: 0 !default;
 $transitionDuration: 0.2s !default;
 $formElementTransition: background-color $transitionDuration,
 color $transitionDuration, border-color $transitionDuration,
