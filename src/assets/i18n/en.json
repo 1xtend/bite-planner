@@ -10,5 +10,10 @@
   },
   "nav": {
     "home": "Home"
+  },
+  "auth": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password"
   }
 }

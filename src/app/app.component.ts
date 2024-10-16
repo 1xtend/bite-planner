@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { ThemeService } from './core/services/theme.service';
 import { LocalStorage } from './shared/models/enums/local-storage.enum';
@@ -11,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, AsyncPipe],
+  imports: [RouterOutlet, HeaderComponent, AsyncPipe, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -30,6 +30,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.setSavedTheme();
+
+    this.authService.user$.subscribe((user) => {
+      console.log('User', user);
+    });
   }
 
   private setSavedTheme(): void {

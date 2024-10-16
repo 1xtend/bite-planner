@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="login">
+  <p-card [header]="'auth.login' | translate" class="form-card">
+    <form [formGroup]="authForm" class="form">
+      <div class="form__row">
+        <label for="login-email">{{ 'auth.email' | translate }}</label>
+        <input id="login-email" pInputText class="form__input" formControlName="email"/>
+        <span>{{ authForm.controls['email'].errors?.['email'] }}</span>
+      </div>
+      <div class="form__row">
+        <label for="login-password">{{ 'auth.password' | translate }}</label>
+        <input id="login-password" pInputText class="form__input" formControlName="password"/>
+      </div>
+
+      <div class="form__footer">
+        <p-button [label]="'auth.login' | translate" type="submit"></p-button>
+      </div>
+    </form>
+  </p-card>
+</div>
