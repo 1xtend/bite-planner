@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { emailValidator } from '../../core/validators/email.validator';
 import { passwordValidator } from '../../core/validators/password.validator';
+import { LoginForm } from '../../shared/models/interfaces/login-form.interface';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ import { passwordValidator } from '../../core/validators/password.validator';
 export class LoginComponent {
   private fb = inject(FormBuilder).nonNullable;
 
-  authForm = this.fb.group({
+  authForm = this.fb.group<LoginForm>({
     email: this.fb.control('', [Validators.required, emailValidator()]),
     password: this.fb.control('', [Validators.required, passwordValidator()])
   });
