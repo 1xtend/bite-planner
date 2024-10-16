@@ -4,9 +4,8 @@
 @import './assets/styles/variables';
 
 /*
-dark: $primaryColor: #839a71 !default;
-light: $primaryColor: #5c7650 !default;
-
+ dark: $primaryColor: #839a71 !default;
+ light: $primaryColor: #5c7650 !default;
 */
 
 .wrapper {
@@ -14,7 +13,7 @@ light: $primaryColor: #5c7650 !default;
   flex-direction: column;
   overflow: hidden;
   min-height: 100vh;
-  padding: var(--spacing-s);
+  padding: var(--spacing-md);
 }
 
 .main {
