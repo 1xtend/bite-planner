@@ -2,7 +2,7 @@
   ::ng-deep {
     .icon-button {
       width: auto;
-      padding: 0.5rem;
+      padding: var(--spacing-sm);
     }
 
     .p-button-icon {

@@ -3,11 +3,17 @@
 @import './assets/styles/reset';
 @import './assets/styles/variables';
 
+/*
+ dark: $primaryColor: #839a71 !default;
+ light: $primaryColor: #5c7650 !default;
+*/
+
 .wrapper {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   min-height: 100vh;
+  padding: var(--spacing-md);
 }
 
 .main {
