@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { ThemeService } from '../../../core/services/theme.service';
 import { toSignal } from '@angular/core/rxjs-interop';

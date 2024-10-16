@@ -1,16 +1,16 @@
 :host {
   .header {
-    background-color: var(--surface-ground);
-    padding: var(--spacing-xs) var(--spacing-s);
-    border-bottom: 1px solid var(--surface-border);
+    background-color: var(--surface-card);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--spacing-s);
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+    border: 1px solid var(--surface-border);
   }
 
   .nav {
     display: flex;
-    gap: var(--spacing-s);
+    gap: var(--spacing-md);
   }
 }
