@@ -4,13 +4,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-xs) var(--spacing-s);
-    gap: var(--spacing-s);
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
     border: 1px solid var(--surface-border);
   }
 
   .nav {
     display: flex;
-    gap: var(--spacing-s);
+    gap: var(--spacing-md);
   }
 }
