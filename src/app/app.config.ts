@@ -18,9 +18,17 @@ const firebaseConfig = environment.firebase;
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    // Firebase
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+
+    // Core
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
+
+    // Translations
     importProvidersFrom(TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -28,10 +36,6 @@ export const appConfig: ApplicationConfig = {
         useFactory: TranslateHttpLoaderFactory,
         deps: [HttpClient]
       }
-    })),
-    // Firebase
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    }))
   ]
 };

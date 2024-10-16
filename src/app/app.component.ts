@@ -1,29 +1,32 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { ThemeService } from './core/services/theme.service';
 import { LocalStorage } from './shared/models/enums/local-storage.enum';
 import { Theme } from './shared/models/types/theme.type';
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FormsModule } from '@angular/forms';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { MenubarModule } from 'primeng/menubar';
-import { ThemeSwitchComponent } from './shared/components/theme-switch/theme-switch.component';
+import { AuthService } from './core/services/auth.service';
+import { distinctUntilChanged, filter, map } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, CardModule, ButtonModule, DropdownModule, CheckboxModule, InputTextModule, InputTextareaModule, FormsModule, InputSwitchModule, MenubarModule, ThemeSwitchComponent],
+  imports: [RouterOutlet, HeaderComponent, AsyncPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   private themeService = inject(ThemeService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  private routesWithoutWrapper: string[] = ['/login'];
+
+  hideWrapper$ = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+    map((event: any) => this.routesWithoutWrapper.includes(event.url)),
+    distinctUntilChanged()
+  );
 
   ngOnInit(): void {
     this.setSavedTheme();
