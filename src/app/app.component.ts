@@ -25,9 +25,6 @@ import { ThemeSwitchComponent } from './shared/components/theme-switch/theme-swi
 export class AppComponent implements OnInit {
   private themeService = inject(ThemeService);
 
-  options = [{ label: 'test' }, { label: 'test -2' }];
-  text = 'long text, super loooong text';
-
   ngOnInit(): void {
     this.setSavedTheme();
   }
