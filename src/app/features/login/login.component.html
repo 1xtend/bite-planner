@@ -1,18 +1,24 @@
 <p-card [header]="'auth.login' | translate" class="form-card">
-  <form [formGroup]="authForm" class="form">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form__row">
-      <label for="login-email">{{ 'auth.email' | translate }}</label>
-      <input id="login-email" pInputText class="form__input" formControlName="email"/>
-      <app-display-control-error [control]="authForm.controls['email']"></app-display-control-error>
+      <label class="form__label" for="login-email">{{ 'auth.email' | translate }}</label>
+      <input
+        id="login-email"
+        pInputText
+        class="form__input"
+        formControlName="email"
+        placeholder="example@gmail.com"
+      />
+      <app-display-control-error [control]="loginForm.controls['email']"></app-display-control-error>
     </div>
     <div class="form__row">
-      <label for="login-password">{{ 'auth.password' | translate }}</label>
-      <input id="login-password" pInputText class="form__input" formControlName="password"/>
-      <app-display-control-error [control]="authForm.controls['password']"></app-display-control-error>
+      <label class="form__label" for="login-password">{{ 'auth.password' | translate }}</label>
+      <app-password-input inputId="login-password" formControlName="password"></app-password-input>
+      <app-display-control-error [control]="loginForm.controls['password']"></app-display-control-error>
     </div>
 
     <div class="form__footer">
-      <p-button [label]="'auth.login' | translate" type="submit"></p-button>
+      <p-button type="submit" [label]="'auth.login' | translate"></p-button>
     </div>
   </form>
 </p-card>

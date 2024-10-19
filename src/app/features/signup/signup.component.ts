@@ -58,6 +58,6 @@ export class SignupComponent {
       return;
     }
 
-    console.log(this.signupForm.value);
+    console.log(this.signupForm.getRawValue());
   }
 }

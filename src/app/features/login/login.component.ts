@@ -5,11 +5,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { emailValidator } from '../../core/validators/email.validator';
-import { passwordValidator } from '../../core/validators/password.validator';
 import { LoginForm } from '../../shared/models/interfaces/login-form.interface';
 import {
   DisplayControlErrorComponent
 } from '../../shared/components/display-control-error/display-control-error.component';
+import { PasswordInputComponent } from '../../shared/components/password-input/password-input.component';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,8 @@ import {
     InputTextModule,
     ReactiveFormsModule,
     ButtonModule,
-    DisplayControlErrorComponent
+    DisplayControlErrorComponent,
+    PasswordInputComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -29,8 +30,17 @@ import {
 export class LoginComponent {
   private fb = inject(FormBuilder).nonNullable;
 
-  authForm = this.fb.group<LoginForm>({
+  loginForm = this.fb.group<LoginForm>({
     email: this.fb.control('', [Validators.required, emailValidator()]),
-    password: this.fb.control('', [Validators.required, passwordValidator()])
-  });
+    password: this.fb.control('', [Validators.required])
+  }, { updateOn: 'blur' });
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    console.log(this.loginForm.getRawValue());
+  }
 }

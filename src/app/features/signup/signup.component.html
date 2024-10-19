@@ -32,9 +32,9 @@
     <div class="form__row">
       <label class="form__label" for="signup-password">{{ 'auth.password' | translate }}</label>
       <app-password-input inputId="signup-password" formControlName="password"></app-password-input>
-      <app-display-control-error [control]="signupForm.controls['password']"></app-display-control-error>
       <app-password-conditions [control]="signupForm.controls['password']"></app-password-conditions>
     </div>
+
     <div class="form__footer">
       <p-button type="submit" [label]="'auth.signup' | translate"></p-button>
     </div>
