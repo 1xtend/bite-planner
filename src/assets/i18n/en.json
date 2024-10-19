@@ -6,7 +6,8 @@
   },
   "tooltip": {
     "switch-dark-theme": "Switch to dark theme",
-    "switch-light-theme": "Switch to light theme"
+    "switch-light-theme": "Switch to light theme",
+    "username-help-text": "You can use letters, digits, and special characters like underscores (_), dots (.), and dashes (-)."
   },
   "nav": {
     "home": "Home"
@@ -19,7 +20,13 @@
     "username": "Username"
   },
   "error": {
-    "email": "",
-    "password": ""
+    "email": "Please enter a valid email address.",
+    "required": "This field cannot be empty.",
+    "username": "Username contains invalid characters.",
+    "password": {
+      "minlength": "At least 8 characters.",
+      "uppercase": "At least one uppercase letter.",
+      "number": "At least one number"
+    }
   }
 }

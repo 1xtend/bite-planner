@@ -1,19 +1,42 @@
 <p-card [header]="'auth.signup' | translate" class="form-card">
-  <form [formGroup]="signupForm" class="form">
+  <form [formGroup]="signupForm" class="form" (ngSubmit)="onSubmit()">
     <div class="form__row">
       <label class="form__label" for="signup-username">{{ 'auth.username' | translate }}</label>
-      <input id="signup-username" pInputText class="form__input" formControlName="username"/>
+      <p-iconField iconPosition="right">
+        <input
+          id="signup-username"
+          pInputText
+          class="form__input"
+          formControlName="username"
+          placeholder="john_doe"
+        />
+        <p-inputIcon
+          styleClass="pi pi-exclamation-circle"
+          [pTooltip]="'tooltip.username-help-text' | translate"
+          tooltipStyleClass="tooltip-wide"
+        ></p-inputIcon>
+      </p-iconField>
+      <app-display-control-error [control]="signupForm.controls['username']"></app-display-control-error>
     </div>
     <div class="form__row">
       <label class="form__label" for="signup-email">{{ 'auth.email' | translate }}</label>
-      <input id="signup-email" pInputText class="form__input" formControlName="email"/>
+      <input
+        id="signup-email"
+        pInputText
+        class="form__input"
+        formControlName="email"
+        placeholder="example@gmail.com"
+      />
+      <app-display-control-error [control]="signupForm.controls['email']"></app-display-control-error>
     </div>
     <div class="form__row">
       <label class="form__label" for="signup-password">{{ 'auth.password' | translate }}</label>
       <app-password-input inputId="signup-password" formControlName="password"></app-password-input>
+      <app-display-control-error [control]="signupForm.controls['password']"></app-display-control-error>
+      <app-password-conditions [control]="signupForm.controls['password']"></app-password-conditions>
     </div>
     <div class="form__footer">
-      <p-button [label]="'auth.signup' | translate"></p-button>
+      <p-button type="submit" [label]="'auth.signup' | translate"></p-button>
     </div>
   </form>
 </p-card>

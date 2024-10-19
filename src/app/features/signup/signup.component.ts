@@ -6,6 +6,16 @@ import { SignupForm } from '../../shared/models/interfaces/signup-form.interface
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { PasswordInputComponent } from '../../shared/components/password-input/password-input.component';
+import { usernameValidator } from '../../core/validators/username.validator';
+import {
+  DisplayControlErrorComponent
+} from '../../shared/components/display-control-error/display-control-error.component';
+import { emailValidator } from '../../core/validators/email.validator';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { TooltipModule } from 'primeng/tooltip';
+import { passwordValidator } from '../../core/validators/password.validator';
+import { PasswordConditionsComponent } from '../../shared/components/password-conditions/password-conditions.component';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +26,12 @@ import { PasswordInputComponent } from '../../shared/components/password-input/p
     ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
-    PasswordInputComponent
+    PasswordInputComponent,
+    DisplayControlErrorComponent,
+    IconFieldModule,
+    InputIconModule,
+    TooltipModule,
+    PasswordConditionsComponent
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -26,13 +41,20 @@ export class SignupComponent {
   private fb = inject(FormBuilder).nonNullable;
 
   signupForm = this.fb.group<SignupForm>({
-    username: this.fb.control('', [Validators.required]),
-    email: this.fb.control('', [Validators.required]),
-    password: this.fb.control('', [Validators.required])
+    username: this.fb.control('', {
+      validators: [Validators.required, usernameValidator()],
+      updateOn: 'blur'
+    }),
+    email: this.fb.control('', {
+      validators: [Validators.required, emailValidator()],
+      updateOn: 'blur'
+    }),
+    password: this.fb.control('', [Validators.required, passwordValidator()])
   });
 
   onSubmit(): void {
     if (this.signupForm.invalid) {
+      this.signupForm.markAllAsTouched();
       return;
     }
 
