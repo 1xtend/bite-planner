@@ -8,6 +8,6 @@ export function passwordValidator(): ValidatorFn {
       return null;
     }
 
-    return PASSWORD_REGEXP.test(value) ? null : { email: true };
+    return PASSWORD_REGEXP.test(value) ? null : { password: true };
   };
 }

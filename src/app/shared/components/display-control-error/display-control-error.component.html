@@ -1,0 +1,7 @@
+@if (control().invalid && (control().dirty || control().touched)) {
+  @for (error of errors; track $index) {
+    @if (control().errors?.[error]) {
+      <div class="text-red-600">{{ 'error.' + error }}</div>
+    }
+  }
+}

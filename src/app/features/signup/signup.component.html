@@ -1,0 +1,19 @@
+<p-card [header]="'auth.signup' | translate" class="form-card">
+  <form [formGroup]="signupForm" class="form">
+    <div class="form__row">
+      <label class="form__label" for="signup-username">{{ 'auth.username' | translate }}</label>
+      <input id="signup-username" pInputText class="form__input" formControlName="username"/>
+    </div>
+    <div class="form__row">
+      <label class="form__label" for="signup-email">{{ 'auth.email' | translate }}</label>
+      <input id="signup-email" pInputText class="form__input" formControlName="email"/>
+    </div>
+    <div class="form__row">
+      <label class="form__label" for="signup-password">{{ 'auth.password' | translate }}</label>
+      <app-password-input inputId="signup-password" formControlName="password"></app-password-input>
+    </div>
+    <div class="form__footer">
+      <p-button [label]="'auth.signup' | translate"></p-button>
+    </div>
+  </form>
+</p-card>

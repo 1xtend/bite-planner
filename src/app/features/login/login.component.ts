@@ -7,6 +7,9 @@ import { ButtonModule } from 'primeng/button';
 import { emailValidator } from '../../core/validators/email.validator';
 import { passwordValidator } from '../../core/validators/password.validator';
 import { LoginForm } from '../../shared/models/interfaces/login-form.interface';
+import {
+  DisplayControlErrorComponent
+} from '../../shared/components/display-control-error/display-control-error.component';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,8 @@ import { LoginForm } from '../../shared/models/interfaces/login-form.interface';
     TranslateModule,
     InputTextModule,
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    DisplayControlErrorComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

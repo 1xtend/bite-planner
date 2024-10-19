@@ -35,6 +35,14 @@
 
   &__input {
     width: 100%;
+
+    ::ng-deep .p-password-input {
+      width: 100%;
+    }
+  }
+
+  &__footer {
+    padding-top: var(--spacing-md);
   }
 }
 

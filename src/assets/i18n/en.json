@@ -13,7 +13,13 @@
   },
   "auth": {
     "login": "Login",
+    "signup": "Sign up",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "username": "Username"
+  },
+  "error": {
+    "email": "",
+    "password": ""
   }
 }

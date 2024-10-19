@@ -1,14 +1,12 @@
-@if (hideWrapper$ | async) {
-  <router-outlet></router-outlet>
-} @else {
-  <div class="wrapper">
-    <app-header></app-header>
+<div class="wrapper">
+  <app-header></app-header>
 
-    <main class="main">
-      <a routerLink="/login">Login</a>
-      <router-outlet></router-outlet>
-    </main>
+  <main class="main">
+    <a routerLink="/login">Login</a>
+    <a routerLink="/signup">Signup</a>
+    <router-outlet></router-outlet>
+  </main>
 
-    <!--  <footer class="footer">footer</footer>-->
-  </div>
-}
+  <!--  <footer class="footer">footer</footer>-->
+</div>
+
