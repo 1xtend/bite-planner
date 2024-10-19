@@ -2,8 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { ThemeService } from './core/services/theme.service';
-import { LocalStorage } from './shared/models/enums/local-storage.enum';
-import { Theme } from './shared/models/types/theme.type';
 import { AuthService } from './core/services/auth.service';
 import { distinctUntilChanged, filter, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
@@ -37,7 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   private setSavedTheme(): void {
-    const theme = localStorage.getItem(LocalStorage.Theme) as Theme | null;
-    this.themeService.setTheme(theme || 'light');
+    const theme = this.themeService.getSavedTheme();
+    this.themeService.setTheme(theme);
   }
 }
