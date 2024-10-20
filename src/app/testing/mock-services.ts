@@ -33,3 +33,10 @@ export const mockDialogService = {
   open: jest.fn().mockReturnValue(mockDynamicDialogRef),
   close: jest.fn()
 };
+
+// DialogManagerService
+export const mockDialogManager = {
+  dialogRef: <any>undefined,
+  openDialog: jest.fn(),
+  closeDialog: jest.fn(),
+}
