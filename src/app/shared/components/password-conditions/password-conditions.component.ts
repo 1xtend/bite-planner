@@ -1,13 +1,12 @@
 import { Component, input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-password-conditions',
   standalone: true,
   imports: [
-    NgClass,
     NgTemplateOutlet,
     TranslateModule
   ],

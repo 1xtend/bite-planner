@@ -4,9 +4,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-icon-button',
   standalone: true,
-  imports: [
-    ButtonModule
-  ],
+  imports: [ButtonModule],
   templateUrl: './icon-button.component.html',
   styleUrl: './icon-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

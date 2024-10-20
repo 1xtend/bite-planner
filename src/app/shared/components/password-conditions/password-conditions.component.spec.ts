@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PasswordConditionsComponent } from './password-conditions.component';
+import { FormControl } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PasswordConditionsComponent', () => {
   let component: PasswordConditionsComponent;
@@ -8,12 +10,16 @@ describe('PasswordConditionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PasswordConditionsComponent]
+      imports: [PasswordConditionsComponent, TranslateModule.forRoot()]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PasswordConditionsComponent);
     component = fixture.componentInstance;
+
+    const control = new FormControl('');
+    fixture.componentRef.setInput('control', control);
+
     fixture.detectChanges();
   });
 
