@@ -14,3 +14,6 @@ export const mockAuthService = {
 
 // FirebaseAuth
 export const mockFirebaseAuth = {};
+
+// ActivatedRoute
+export const mockActivatedRoute = {};
