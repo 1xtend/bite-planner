@@ -1,8 +1,9 @@
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { Theme } from '../shared/models/types/theme.type';
 
 // ThemeService
 export const mockThemeService = {
-  theme$: of(''),
+  theme$: new BehaviorSubject<Theme>('light'),
   setTheme: jest.fn()
 };
 
