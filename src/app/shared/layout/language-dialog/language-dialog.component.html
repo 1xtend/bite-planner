@@ -1,0 +1,13 @@
+@for (language of languagesArray; track $index) {
+  <button
+    pButton
+    [outlined]="(currentLanguage$ | async) !== language"
+    class="language-button"
+    (click)="selectLanguage(language)"
+  >
+    <p class="p-reset language-button__label">{{ labels[language].label }}</p>
+    <small class="language-button__sub">{{ labels[language].native }}</small>
+  </button>
+}
+
+

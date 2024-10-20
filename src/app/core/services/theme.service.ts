@@ -33,7 +33,7 @@ export class ThemeService {
       return 'dark';
     }
 
-    return theme || 'dark';
+    return theme;
   }
 
   private isAvailableTheme(theme: Theme): boolean {

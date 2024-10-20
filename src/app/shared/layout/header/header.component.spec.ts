@@ -5,6 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject, take } from 'rxjs';
 import { mockActivatedRoute } from '../../../testing/mock-services';
+import { DialogService } from 'primeng/dynamicdialog';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -27,6 +28,7 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent, TranslateModule.forRoot()],
       providers: [
+        DialogService,
         { provide: Router, useValue: mockRouter },
         { provide: ActivatedRoute, useValue: mockActivatedRoute }
       ]

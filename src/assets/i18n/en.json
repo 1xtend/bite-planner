@@ -7,7 +7,8 @@
   "tooltip": {
     "switch-dark-theme": "Switch to dark theme",
     "switch-light-theme": "Switch to light theme",
-    "username-help-text": "You can use letters, digits, and special characters like underscores (_), dots (.), and dashes (-)."
+    "username-help-text": "You can use letters, digits, and special characters like underscores (_), dots (.), and dashes (-).",
+    "change-language": "Change language"
   },
   "nav": {
     "home": "Home"
@@ -30,5 +31,8 @@
       "uppercase": "At least one uppercase letter.",
       "number": "At least one number"
     }
+  },
+  "locale": {
+    "select-language": "Select language"
   }
 }

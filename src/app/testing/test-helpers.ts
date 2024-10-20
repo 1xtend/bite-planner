@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 export function testControlValidity(control: FormControl, value: any, expectedValue: boolean, expectedErrors?: any): void {
   control.setValue(value);
@@ -54,3 +55,23 @@ export function testPasswordControl(control: FormControl): void {
   testControlValidity(control, 'Valid123', true);
   testControlValidity(control, 'PASSWORD1!', true);
 }
+
+export const mockDynamicDialogRef = {
+  close: jest.fn(),
+  destroy: jest.fn(),
+  dragStart: jest.fn(),
+  dragEnd: jest.fn(),
+  resizeInit: jest.fn(),
+  resizeEnd: jest.fn(),
+  maximize: jest.fn(),
+
+  onClose: new Subject<any>(),
+  onDestroy: new Subject<any>(),
+  onDragStart: new Subject<any>(),
+  onDragEnd: new Subject<any>(),
+  onResizeInit: new Subject<any>(),
+  onResizeEnd: new Subject<any>(),
+  onMaximize: new Subject<any>(),
+
+  onChildComponentLoaded: new Subject<any>()
+};
