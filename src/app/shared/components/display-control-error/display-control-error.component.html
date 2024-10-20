@@ -1,0 +1,7 @@
+@if (control().invalid && (control().dirty || control().touched)) {
+  @for (error of errors; track $index) {
+    @if (control().errors?.[error]) {
+      <span class="text-red-500">{{ 'error.' + error | translate }}</span>
+    }
+  }
+}

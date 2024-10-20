@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { ThemeService } from '../../../core/services/theme.service';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -21,7 +21,7 @@ export class ThemeSwitchComponent {
   private themeService = inject(ThemeService);
   private currentTheme = toSignal(this.themeService.theme$);
   icon = computed<string>(() => this.currentTheme() === 'light' ? 'pi pi-moon' : 'pi pi-sun');
-  tooltip = computed<string>(() => `tooltip.switch-${ this.currentTheme() === 'dark' ? 'light' : 'dark' }-theme`);
+  tooltip = computed<string>(() => `tooltip.switch-${ this.currentTheme() === 'light' ? 'dark' : 'light' }-theme`);
 
   toggle(): void {
     const theme = this.currentTheme() === 'dark' ? 'light' : 'dark';

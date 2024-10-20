@@ -3,6 +3,7 @@
     color: $panelContentTextColor;
     box-shadow: $cardShadow;
     border-radius: $borderRadius;
+    border: 1px solid $borderDefault;
 
     .p-card-body {
         padding: $cardBodyPadding;

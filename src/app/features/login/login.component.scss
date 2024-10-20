@@ -1,0 +1,11 @@
+:host {
+  flex-grow: 1;
+  display: grid;
+  place-items: center;
+
+  .login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+}

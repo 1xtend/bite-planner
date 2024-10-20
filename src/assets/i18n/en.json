@@ -6,9 +6,29 @@
   },
   "tooltip": {
     "switch-dark-theme": "Switch to dark theme",
-    "switch-light-theme": "Switch to light theme"
+    "switch-light-theme": "Switch to light theme",
+    "username-help-text": "You can use letters, digits, and special characters like underscores (_), dots (.), and dashes (-)."
   },
   "nav": {
     "home": "Home"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "have-account": "Already have an account?",
+    "new-user": "New to BitePlanner?"
+  },
+  "error": {
+    "email": "Please enter a valid email address.",
+    "required": "This field cannot be empty.",
+    "username": "Username contains invalid characters.",
+    "password": {
+      "minlength": "At least 8 characters.",
+      "uppercase": "At least one uppercase letter.",
+      "number": "At least one number"
+    }
   }
 }

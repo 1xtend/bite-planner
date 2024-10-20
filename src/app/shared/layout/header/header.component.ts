@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { distinctUntilChanged, fromEvent, map, startWith } from 'rxjs';
 import { IconButtonComponent } from '../../components/icon-button/icon-button.component';
 import { ThemeSwitchComponent } from '../../components/theme-switch/theme-switch.component';
+import { distinctUntilChanged, filter, map } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -14,16 +16,21 @@ import { ThemeSwitchComponent } from '../../components/theme-switch/theme-switch
     ButtonModule,
     TranslateModule,
     IconButtonComponent,
-    ThemeSwitchComponent
+    ThemeSwitchComponent,
+    AsyncPipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  visibleNavigation$ = fromEvent(window, 'resize').pipe(
-    startWith(() => window.innerWidth > 1024),
-    map(() => window.innerWidth > 1024),
+  private router = inject(Router);
+
+  private basicHeaderRoutes: string[] = ['/login', '/signup'];
+
+  basicHeader$ = this.router.events.pipe(
+    filter((event) => event instanceof NavigationEnd),
+    map((event: any) => this.basicHeaderRoutes.includes(event.url)),
     distinctUntilChanged()
   );
 }
