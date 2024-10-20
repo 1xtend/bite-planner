@@ -30,5 +30,8 @@
       "uppercase": "At least one uppercase letter.",
       "number": "At least one number"
     }
+  },
+  "locale": {
+    "select-language": "Select language"
   }
 }
