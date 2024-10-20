@@ -9,7 +9,7 @@ import { DEFAULT_DIALOG_CONFIG } from '../../shared/helpers/dialog-config';
 export class DialogManagerService {
   private dialogService = inject(DialogService);
 
-  private dialogRef: DynamicDialogRef | undefined = undefined;
+  dialogRef: DynamicDialogRef | undefined = undefined;
 
   openDialog(component: any, config?: DynamicDialogConfig): DynamicDialogRef {
     const dialogConfig: DynamicDialogConfig = {
