@@ -1,0 +1,16 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+
+  .language-button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    &.p-button-outlined {
+      color: var(--text-color);
+    }
+  }
+}
