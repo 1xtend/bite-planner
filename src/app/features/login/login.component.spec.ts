@@ -4,7 +4,7 @@ import { LoginComponent } from './login.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { mockActivatedRoute } from '../../testing/mock-services';
-import { testControlValidity } from '../../testing/test-helpers';
+import { testControlValidity, testEmailControl } from '../../testing/test-helpers';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -54,15 +54,7 @@ describe('LoginComponent', () => {
 
     it('should validate email control', () => {
       const emailControl = component.loginForm.controls['email'];
-
-      testControlValidity(emailControl, '', false);
-      testControlValidity(emailControl, '.', false);
-      testControlValidity(emailControl, 'test<:*@gmail.com', false);
-      testControlValidity(emailControl, 'test@', false);
-      testControlValidity(emailControl, 'test@gmail.', false);
-      testControlValidity(emailControl, 'test@gmail.com', true);
-      testControlValidity(emailControl, 'test.email@gmail.com', true);
-      testControlValidity(emailControl, 'test@gmail.sub.com', true);
+      testEmailControl(emailControl);
     });
 
     it('should validate password control', () => {
