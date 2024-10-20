@@ -12,7 +12,7 @@ describe('ThemeService', () => {
     linkEl.id = 'app-theme';
     linkEl.rel = 'stylesheet';
     linkEl.type = 'text/css';
-    linkEl.href = `lara-${ theme }-green.css`;
+    linkEl.href = `${ theme }.css`;
     document.head.appendChild(linkEl);
     return linkEl;
   }
@@ -26,25 +26,41 @@ describe('ThemeService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('setTheme', () => {
-    afterEach(() => {
+  describe('when setTheme is called', () => {
+    beforeEach(() => {
       document.getElementById('app-theme')?.remove();
+      localStorage.clear();
     });
 
     it('should throw error if app-theme element was not found', () => {
       expect(() => service.setTheme('dark')).toThrow('There is no "app-theme" element on the page.');
     });
 
-    it('should set dark theme', fakeAsync(() => {
+    it('should set dark theme when received invalid theme', fakeAsync(() => {
       const linkEl = appendAppThemeElement('light');
+
+      service.setTheme('invalid-theme' as Theme);
 
       service.theme$.pipe(take(1)).subscribe((theme) => {
         expect(theme).toBe('dark');
       });
 
+      expect(linkEl.href).toContain('dark.css');
+      expect(localStorage.getItem(LocalStorage.Theme)).toBe('dark');
+
+      flush();
+    }));
+
+    it('should set dark theme', fakeAsync(() => {
+      const linkEl = appendAppThemeElement('light');
+
       service.setTheme('dark');
 
-      expect(linkEl.href).toContain('lara-dark-green.css');
+      service.theme$.pipe(take(1)).subscribe((theme) => {
+        expect(theme).toBe('dark');
+      });
+
+      expect(linkEl.href).toContain('dark.css');
       expect(localStorage.getItem(LocalStorage.Theme)).toBe('dark');
 
       flush();
@@ -53,13 +69,13 @@ describe('ThemeService', () => {
     it('should set light theme', fakeAsync(() => {
       const linkEl = appendAppThemeElement('dark');
 
+      service.setTheme('light');
+
       service.theme$.pipe(take(1)).subscribe((theme) => {
         expect(theme).toBe('light');
       });
 
-      service.setTheme('light');
-
-      expect(linkEl.href).toContain('lara-light-green.css');
+      expect(linkEl.href).toContain('light.css');
       expect(localStorage.getItem(LocalStorage.Theme)).toBe('light');
 
       flush();

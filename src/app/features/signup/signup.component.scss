@@ -2,4 +2,10 @@
   flex-grow: 1;
   display: grid;
   place-items: center;
+
+  .signup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
 }

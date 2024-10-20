@@ -10,6 +10,7 @@ import {
   DisplayControlErrorComponent
 } from '../../shared/components/display-control-error/display-control-error.component';
 import { PasswordInputComponent } from '../../shared/components/password-input/password-input.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ import { PasswordInputComponent } from '../../shared/components/password-input/p
     ReactiveFormsModule,
     ButtonModule,
     DisplayControlErrorComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

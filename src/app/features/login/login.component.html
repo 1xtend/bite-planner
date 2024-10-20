@@ -1,25 +1,31 @@
-<p-card [header]="'auth.login' | translate" class="form-card">
-  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form__row">
-      <label class="form__label" for="login-email">{{ 'auth.email' | translate }}</label>
-      <input
-        id="login-email"
-        pInputText
-        class="form__input"
-        formControlName="email"
-        placeholder="example@gmail.com"
-      />
-      <app-display-control-error [control]="loginForm.controls['email']"></app-display-control-error>
-    </div>
-    <div class="form__row">
-      <label class="form__label" for="login-password">{{ 'auth.password' | translate }}</label>
-      <app-password-input inputId="login-password" formControlName="password"></app-password-input>
-      <app-display-control-error [control]="loginForm.controls['password']"></app-display-control-error>
-    </div>
+<div class="login form-card">
+  <p-card [header]="'auth.login' | translate">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form__row">
+        <label class="form__label" for="login-email">{{ 'auth.email' | translate }}</label>
+        <input
+          id="login-email"
+          pInputText
+          class="form__input"
+          formControlName="email"
+          placeholder="example@gmail.com"
+        />
+        <app-display-control-error [control]="loginForm.controls['email']"></app-display-control-error>
+      </div>
+      <div class="form__row">
+        <label class="form__label" for="login-password">{{ 'auth.password' | translate }}</label>
+        <app-password-input inputId="login-password" formControlName="password"></app-password-input>
+        <app-display-control-error [control]="loginForm.controls['password']"></app-display-control-error>
+      </div>
 
-    <div class="form__footer">
-      <p-button type="submit" [label]="'auth.login' | translate"></p-button>
-    </div>
-  </form>
-</p-card>
+      <div class="form__footer">
+        <p-button type="submit" [label]="'auth.login' | translate"></p-button>
+      </div>
+    </form>
+  </p-card>
 
+  <p-card class="auth-suggestion-card">
+    <p class="m-0">{{ 'auth.new-user' | translate }}</p>
+    <a class="link" routerLink="/signup">{{ 'auth.signup' | translate }}</a>
+  </p-card>
+</div>

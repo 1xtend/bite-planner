@@ -16,6 +16,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { passwordValidator } from '../../core/validators/password.validator';
 import { PasswordConditionsComponent } from '../../shared/components/password-conditions/password-conditions.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -31,7 +32,8 @@ import { PasswordConditionsComponent } from '../../shared/components/password-co
     IconFieldModule,
     InputIconModule,
     TooltipModule,
-    PasswordConditionsComponent
+    PasswordConditionsComponent,
+    RouterLink
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',

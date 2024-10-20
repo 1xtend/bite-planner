@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { startWith, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Theme } from '../../shared/models/types/theme.type';
 import { LocalStorage } from '../../shared/models/enums/local-storage.enum';
 import { AVAILABLE_THEMES } from '../../shared/helpers/available-themes';
@@ -8,10 +8,8 @@ import { AVAILABLE_THEMES } from '../../shared/helpers/available-themes';
   providedIn: 'root'
 })
 export class ThemeService {
-  private themeSubject = new Subject<Theme>();
-  theme$ = this.themeSubject.asObservable().pipe(
-    startWith(this.getSavedTheme())
-  );
+  private themeSubject = new BehaviorSubject<Theme>(this.getSavedTheme());
+  theme$ = this.themeSubject.asObservable();
 
   setTheme(theme: Theme): void {
     const linkEl = document.getElementById('app-theme') as HTMLLinkElement | null;

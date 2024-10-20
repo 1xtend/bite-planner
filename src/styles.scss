@@ -64,3 +64,22 @@
 .tooltip-wide {
   max-width: 420px;
 }
+
+.auth-suggestion-card {
+  .p-card-content {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+}
+
+.link {
+  color: var(--primary-400);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

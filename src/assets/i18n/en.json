@@ -17,7 +17,9 @@
     "signup": "Sign up",
     "email": "Email",
     "password": "Password",
-    "username": "Username"
+    "username": "Username",
+    "have-account": "Already have an account?",
+    "new-user": "New to BitePlanner?"
   },
   "error": {
     "email": "Please enter a valid email address.",
