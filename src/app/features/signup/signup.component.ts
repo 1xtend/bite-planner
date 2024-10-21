@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,6 +17,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { passwordValidator } from '../../core/validators/password.validator';
 import { PasswordConditionsComponent } from '../../shared/components/password-conditions/password-conditions.component';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
 
 @Component({
   selector: 'app-signup',
@@ -41,6 +43,9 @@ import { RouterLink } from '@angular/router';
 })
 export class SignupComponent {
   private fb = inject(FormBuilder).nonNullable;
+  private authService = inject(AuthService);
+
+  loading = signal<boolean>(false);
 
   signupForm = this.fb.group<SignupForm>({
     username: this.fb.control('', {
@@ -60,6 +65,22 @@ export class SignupComponent {
       return;
     }
 
-    console.log(this.signupForm.getRawValue());
+    const value: SignupFormValue = this.signupForm.getRawValue();
+
+    this.signupForm.disable();
+    this.loading.set(true);
+    console.log('value', value);
+
+    this.authService.signup(value).subscribe({
+      next: (value) => {
+        console.log('Success Signup', value);
+        this.loading.set(false);
+        this.signupForm.enable();
+      },
+      error: (err) => {
+        this.loading.set(false);
+        this.signupForm.enable();
+      }
+    });
   }
 }

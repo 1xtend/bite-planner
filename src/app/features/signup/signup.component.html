@@ -37,7 +37,12 @@
       </div>
 
       <div class="form__footer">
-        <p-button type="submit" [label]="'auth.signup' | translate"></p-button>
+        <p-button
+          type="submit"
+          [label]="'auth.signup' | translate"
+          [loading]="loading()"
+          [disabled]="loading()"
+        ></p-button>
       </div>
     </form>
   </p-card>
