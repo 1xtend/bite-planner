@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,6 +11,8 @@ import {
 } from '../../shared/components/display-control-error/display-control-error.component';
 import { PasswordInputComponent } from '../../shared/components/password-input/password-input.component';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { LoginFormValue } from '../../shared/models/types/login-form-value.type';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +33,9 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   private fb = inject(FormBuilder).nonNullable;
+  private authService = inject(AuthService);
+
+  loading = signal<boolean>(false);
 
   loginForm = this.fb.group<LoginForm>({
     email: this.fb.control('', [Validators.required, emailValidator()]),
@@ -38,11 +43,27 @@ export class LoginComponent {
   }, { updateOn: 'blur' });
 
   onSubmit(): void {
-    if (this.loginForm.invalid) {
+    if (this.loginForm.invalid || this.loading()) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    console.log(this.loginForm.getRawValue());
+    const value: LoginFormValue = this.loginForm.getRawValue();
+
+    this.loginForm.disable();
+    this.loading.set(true);
+    console.log('value', value);
+
+    this.authService.login(value).subscribe({
+      next: (response) => {
+        console.log('Success Login', response);
+        this.loginForm.enable();
+        this.loading.set(false);
+      },
+      error: () => {
+        this.loginForm.enable();
+        this.loading.set(false);
+      }
+    });
   }
 }

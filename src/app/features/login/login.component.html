@@ -19,7 +19,12 @@
       </div>
 
       <div class="form__footer">
-        <p-button type="submit" [label]="'auth.login' | translate"></p-button>
+        <p-button
+          type="submit"
+          [label]="'auth.login' | translate"
+          [loading]="loading()"
+          [disabled]="loading()"
+        ></p-button>
       </div>
     </form>
   </p-card>

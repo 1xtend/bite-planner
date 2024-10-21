@@ -60,7 +60,7 @@ export class SignupComponent {
   });
 
   onSubmit(): void {
-    if (this.signupForm.invalid) {
+    if (this.signupForm.invalid || this.loading()) {
       this.signupForm.markAllAsTouched();
       return;
     }
@@ -72,12 +72,12 @@ export class SignupComponent {
     console.log('value', value);
 
     this.authService.signup(value).subscribe({
-      next: (value) => {
-        console.log('Success Signup', value);
+      next: (response) => {
+        console.log('Success Signup', response);
         this.loading.set(false);
         this.signupForm.enable();
       },
-      error: (err) => {
+      error: () => {
         this.loading.set(false);
         this.signupForm.enable();
       }

@@ -1,4 +1,5 @@
 export enum LocalStorage {
   Theme = 'theme',
-  Language = 'language'
+  Language = 'language',
+  Token = 'token'
 }
