@@ -76,6 +76,7 @@ export class SignupComponent {
         console.log('Success Signup', response);
         this.loading.set(false);
         this.signupForm.enable();
+        this.signupForm.reset()
       },
       error: () => {
         this.loading.set(false);

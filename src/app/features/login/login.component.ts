@@ -59,6 +59,7 @@ export class LoginComponent {
         console.log('Success Login', response);
         this.loginForm.enable();
         this.loading.set(false);
+        this.loginForm.reset();
       },
       error: () => {
         this.loginForm.enable();
