@@ -7,10 +7,16 @@
     padding: var(--spacing-md);
     gap: var(--spacing-md);
     border: 1px solid var(--surface-border);
-  }
 
-  .nav {
-    display: flex;
-    gap: var(--spacing-md);
+    &__actions {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+
+    &__auth {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
   }
 }

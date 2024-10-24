@@ -16,6 +16,7 @@
   "auth": {
     "login": "Login",
     "signup": "Sign up",
+    "signout": "Sign out",
     "email": "Email",
     "password": "Password",
     "username": "Username",
@@ -34,5 +35,9 @@
   },
   "locale": {
     "select-language": "Select language"
+  },
+  "sidebar": {
+    "change-language": "Change language",
+    "dark-theme": "Dark theme"
   }
 }

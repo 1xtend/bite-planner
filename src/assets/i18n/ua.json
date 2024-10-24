@@ -16,6 +16,7 @@
   "auth": {
     "login": "Логін",
     "signup": "Реєстрація",
+    "signout": "Вийти",
     "email": "Електронна пошта",
     "password": "Пароль",
     "username": "Ім'я користувача",
@@ -34,5 +35,9 @@
   },
   "locale": {
     "select-language": "Вибрати мову"
+  },
+  "sidebar": {
+    "change-language": "Змінити мову",
+    "dark-theme": "Темна тема"
   }
 }

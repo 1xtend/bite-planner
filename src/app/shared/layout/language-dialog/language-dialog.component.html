@@ -1,7 +1,7 @@
 @for (language of languagesArray; track $index) {
   <button
     pButton
-    [outlined]="(currentLanguage$ | async) !== language"
+    [outlined]="currentLanguage() !== language"
     class="language-button"
     (click)="selectLanguage(language)"
   >

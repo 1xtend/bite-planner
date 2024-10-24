@@ -1,0 +1,45 @@
+<p-sidebar [visible]="(visible$ | async) || false" (onHide)="hide()" position="right">
+  <div class="sidebar">
+    <ul class="p-reset list">
+      <li class="list__item">
+        <button class="list__content list__button" (click)="changeLanguage()">
+          <span class="list__icon pi pi-globe"></span>
+          <span class="list__text">{{ 'sidebar.change-language' | translate }}</span>
+        </button>
+      </li>
+      <li class="list__item">
+        <div class="list__content">
+          <span class="list__icon pi pi-palette"></span>
+          <label for="sidebar-theme-switch" class="list__text">{{ 'sidebar.dark-theme' | translate }}</label>
+          <p-inputSwitch
+            [(ngModel)]="activeDarkTheme" (ngModelChange)="switchTheme()" inputId="sidebar-theme-switch"
+          ></p-inputSwitch>
+        </div>
+      </li>
+    </ul>
+
+
+    <div class="auth">
+      @if (authenticated$ | async) {
+        <p-button [label]="'auth.signout' | translate" (onClick)="signout()" styleClass="w-full"></p-button>
+      } @else {
+        @if (showAuth$ | async) {
+          <p-button
+            [label]="'auth.login' | translate"
+            [outlined]="true"
+            routerLink="/login"
+            styleClass="w-full"
+            (onClick)="hide()"
+          ></p-button>
+          <p-button
+            [label]="'auth.signup' | translate"
+            routerLink="/signup"
+            styleClass="w-full"
+            (onClick)="hide()"
+          ></p-button>
+        }
+      }
+    </div>
+
+  </div>
+</p-sidebar>
