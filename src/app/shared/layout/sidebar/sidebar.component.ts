@@ -11,10 +11,11 @@ import { Theme } from '../../models/types/theme.type';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BreakpointObserver } from '../../../core/services/breakpoint-observer.service';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
+import { Breakpoint } from '../../models/types/breakpoint.type';
 
 @Component({
   selector: 'app-sidebar',
@@ -39,15 +40,14 @@ export class SidebarComponent {
   private translateService = inject(TranslateService);
   private authService = inject(AuthService);
   private breakpointObserver = inject(BreakpointObserver);
+  private router = inject(Router);
 
   private currentTheme = toSignal(this.themeService.theme$);
   activeDarkTheme: boolean = this.currentTheme() === 'dark';
 
   visible$ = this.sidebarService.visible$;
   authenticated$: Observable<boolean> = this.authService.authenticated$;
-  showAuth$: Observable<boolean> = this.breakpointObserver.observe().pipe(
-    map((breakpoint) => breakpoint === 'sm')
-  );
+  breakpoint$: Observable<Breakpoint> = this.breakpointObserver.observe();
 
   hide(): void {
     this.sidebarService.hide();
@@ -68,6 +68,7 @@ export class SidebarComponent {
   signout(): void {
     this.authService.signout().subscribe(() => {
       this.hide();
+      this.router.navigate(['/home']);
     });
   }
 }

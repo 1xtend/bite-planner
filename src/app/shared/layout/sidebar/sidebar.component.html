@@ -23,7 +23,7 @@
       @if (authenticated$ | async) {
         <p-button [label]="'auth.signout' | translate" (onClick)="signout()" styleClass="w-full"></p-button>
       } @else {
-        @if (showAuth$ | async) {
+        @if ((breakpoint$ | async) === 'sm') {
           <p-button
             [label]="'auth.login' | translate"
             [outlined]="true"

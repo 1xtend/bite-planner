@@ -10,7 +10,7 @@ import {
   DisplayControlErrorComponent
 } from '../../shared/components/display-control-error/display-control-error.component';
 import { PasswordInputComponent } from '../../shared/components/password-input/password-input.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { LoginFormValue } from '../../shared/models/types/login-form-value.type';
 
@@ -34,13 +34,14 @@ import { LoginFormValue } from '../../shared/models/types/login-form-value.type'
 export class LoginComponent {
   private fb = inject(FormBuilder).nonNullable;
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   loading = signal<boolean>(false);
 
   loginForm = this.fb.group<LoginForm>({
     email: this.fb.control('', [Validators.required, emailValidator()]),
     password: this.fb.control('', [Validators.required])
-  }, { updateOn: 'blur' });
+  });
 
   onSubmit(): void {
     if (this.loginForm.invalid || this.loading()) {
@@ -52,14 +53,13 @@ export class LoginComponent {
 
     this.loginForm.disable();
     this.loading.set(true);
-    console.log('value', value);
 
     this.authService.login(value).subscribe({
-      next: (response) => {
-        console.log('Success Login', response);
+      next: () => {
         this.loginForm.enable();
         this.loading.set(false);
         this.loginForm.reset();
+        this.router.navigate(['/home']);
       },
       error: () => {
         this.loginForm.enable();

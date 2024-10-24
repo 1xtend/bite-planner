@@ -16,7 +16,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
 import { passwordValidator } from '../../core/validators/password.validator';
 import { PasswordConditionsComponent } from '../../shared/components/password-conditions/password-conditions.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
 
@@ -44,6 +44,7 @@ import { SignupFormValue } from '../../shared/models/types/signup-form-value.typ
 export class SignupComponent {
   private fb = inject(FormBuilder).nonNullable;
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   loading = signal<boolean>(false);
 
@@ -72,11 +73,11 @@ export class SignupComponent {
     console.log('value', value);
 
     this.authService.signup(value).subscribe({
-      next: (response) => {
-        console.log('Success Signup', response);
+      next: () => {
         this.loading.set(false);
         this.signupForm.enable();
-        this.signupForm.reset()
+        this.signupForm.reset();
+        this.router.navigate(['/home']);
       },
       error: () => {
         this.loading.set(false);

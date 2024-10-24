@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/auth';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
 import {
-  distinctUntilChanged,
+  distinctUntilChanged, first,
   from,
   map,
   merge,
@@ -46,46 +46,46 @@ export class AuthService {
     }
 
     return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
-      take(1),
-      this.saveToken(),
-      switchMap((user) => from(updateProfile(user, { displayName: username })).pipe(
-        take(1),
-        map(() => user)
-      )),
-      this.setUser()
+      first(),
+      this.createUser(username),
+      this.saveToken()
     );
   }
 
   login({ email, password }: LoginFormValue): Observable<User> {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
-      take(1),
+      first(),
       this.saveToken()
     );
   }
 
   signout() {
     return from(signOut(this.auth)).pipe(
-      take(1),
+      first(),
       tap(() => {
         this.tokenService.deleteToken();
       })
     );
   }
 
-  private setUser(): OperatorFunction<User, any> {
-    return (source: Observable<User>) => source.pipe(
-      switchMap((user) => {
+  private createUser(username: string): OperatorFunction<UserCredential, any> {
+    return (source: Observable<UserCredential>) => source.pipe(
+      switchMap((credential) => from(updateProfile(credential.user, { displayName: username })).pipe(
+        map(() => credential)
+      )),
+      switchMap((credential) => {
+        const { user } = credential;
         const data: UserData = {
           uid: user.uid,
           displayName: user.displayName!,
           email: user.email!,
-          photoURL: user.photoURL,
-          metadata: user.metadata
+          photoURL: user.photoURL
         };
-        console.log(data);
 
         const userDoc = doc(this.fs, 'users', user.uid);
-        return from(setDoc(userDoc, data));
+        return from(setDoc(userDoc, data)).pipe(
+          map(() => credential)
+        );
       })
     );
   }
