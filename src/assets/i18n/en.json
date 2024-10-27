@@ -39,5 +39,8 @@
   "sidebar": {
     "change-language": "Change language",
     "dark-theme": "Dark theme"
+  },
+  "errors": {
+    "auth/email-already-in-use": "Email already in use"
   }
 }

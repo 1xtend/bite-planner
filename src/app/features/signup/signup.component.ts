@@ -19,6 +19,7 @@ import { PasswordConditionsComponent } from '../../shared/components/password-co
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
+import { ErrorResponse } from '../../shared/models/interfaces/http-error.interface';
 
 @Component({
   selector: 'app-signup',
@@ -79,7 +80,7 @@ export class SignupComponent {
         this.signupForm.reset();
         this.router.navigate(['/home']);
       },
-      error: () => {
+      error: (error: ErrorResponse) => {
         this.loading.set(false);
         this.signupForm.enable();
       }

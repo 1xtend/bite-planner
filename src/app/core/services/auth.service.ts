@@ -25,6 +25,7 @@ import { TokenService } from './token.service';
 import { User, UserCredential } from '@angular/fire/auth';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { UserData } from '../../shared/models/interfaces/user-data.interface';
+import { HttpErrorService } from './http-error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,7 @@ export class AuthService {
   private auth = inject(Auth);
   private fs = inject(Firestore);
   private tokenService = inject(TokenService);
+  private httpErrorService = inject(HttpErrorService);
 
   user$: Observable<User | null> = authState(this.auth);
   authenticated$: Observable<boolean> = this.isAuthenticated().pipe(
@@ -47,6 +49,7 @@ export class AuthService {
 
     return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
       first(),
+      this.httpErrorService.handleError(),
       this.createUser(username),
       this.saveToken()
     );
@@ -55,6 +58,7 @@ export class AuthService {
   login({ email, password }: LoginFormValue): Observable<User> {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
       first(),
+      this.httpErrorService.handleError(),
       this.saveToken()
     );
   }

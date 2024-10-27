@@ -4,11 +4,12 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 import { ThemeService } from './core/services/theme.service';
 import { LocaleService } from './core/services/locale.service';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, SidebarComponent],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent, ToastModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
