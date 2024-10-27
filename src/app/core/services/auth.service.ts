@@ -26,6 +26,7 @@ import { User, UserCredential } from '@angular/fire/auth';
 import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { UserData } from '../../shared/models/interfaces/user-data.interface';
 import { HttpErrorService } from './http-error.service';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -42,23 +43,23 @@ export class AuthService {
     shareReplay(1)
   );
 
-  signup({ email, password, username }: SignupFormValue) {
+  signup({ email, password, username }: SignupFormValue, form?: FormGroup) {
     if (!username) {
       throw new Error('You must provide username to signup!');
     }
 
     return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
       first(),
-      this.httpErrorService.handleError(),
+      this.httpErrorService.handleError(form, { setOtherErrorToForm: true }),
       this.createUser(username),
       this.saveToken()
     );
   }
 
-  login({ email, password }: LoginFormValue): Observable<User> {
+  login({ email, password }: LoginFormValue, form?: FormGroup): Observable<User> {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
       first(),
-      this.httpErrorService.handleError(),
+      this.httpErrorService.handleError(form, { setOtherErrorToForm: true }),
       this.saveToken()
     );
   }

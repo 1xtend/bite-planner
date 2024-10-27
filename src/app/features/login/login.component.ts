@@ -44,25 +44,22 @@ export class LoginComponent {
   });
 
   onSubmit(): void {
-    if (this.loginForm.invalid || this.loading()) {
+    if (this.loginForm.invalid || this.loginForm.pending || this.loading()) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
     const value: LoginFormValue = this.loginForm.getRawValue();
 
-    this.loginForm.disable();
     this.loading.set(true);
 
-    this.authService.login(value).subscribe({
+    this.authService.login(value, this.loginForm).subscribe({
       next: () => {
-        this.loginForm.enable();
         this.loading.set(false);
         this.loginForm.reset();
         this.router.navigate(['/home']);
       },
       error: () => {
-        this.loginForm.enable();
         this.loading.set(false);
       }
     });

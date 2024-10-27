@@ -19,7 +19,6 @@ import { PasswordConditionsComponent } from '../../shared/components/password-co
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
-import { ErrorResponse } from '../../shared/models/interfaces/http-error.interface';
 
 @Component({
   selector: 'app-signup',
@@ -50,39 +49,28 @@ export class SignupComponent {
   loading = signal<boolean>(false);
 
   signupForm = this.fb.group<SignupForm>({
-    username: this.fb.control('', {
-      validators: [Validators.required, usernameValidator()],
-      updateOn: 'blur'
-    }),
-    email: this.fb.control('', {
-      validators: [Validators.required, emailValidator()],
-      updateOn: 'blur'
-    }),
+    username: this.fb.control('', [Validators.required, usernameValidator()]),
+    email: this.fb.control('', [Validators.required, emailValidator()]),
     password: this.fb.control('', [Validators.required, passwordValidator()])
   });
 
   onSubmit(): void {
-    if (this.signupForm.invalid || this.loading()) {
+    if (this.signupForm.invalid || this.signupForm.pending || this.loading()) {
       this.signupForm.markAllAsTouched();
       return;
     }
 
     const value: SignupFormValue = this.signupForm.getRawValue();
-
-    this.signupForm.disable();
     this.loading.set(true);
-    console.log('value', value);
 
-    this.authService.signup(value).subscribe({
+    this.authService.signup(value, this.signupForm).subscribe({
       next: () => {
         this.loading.set(false);
-        this.signupForm.enable();
         this.signupForm.reset();
         this.router.navigate(['/home']);
       },
-      error: (error: ErrorResponse) => {
+      error: () => {
         this.loading.set(false);
-        this.signupForm.enable();
       }
     });
   }
