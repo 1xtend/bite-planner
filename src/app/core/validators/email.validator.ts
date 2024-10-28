@@ -1,8 +1,8 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { EMAIL_REGEXP } from '../../shared/helpers/email.regex';
 
 export function emailValidator(): ValidatorFn {
-  return (control: AbstractControl) => {
+  return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     if (!value) {
       return null;

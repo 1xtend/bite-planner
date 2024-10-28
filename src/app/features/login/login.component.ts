@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -28,8 +28,7 @@ import { LoginFormValue } from '../../shared/models/types/login-form-value.type'
     RouterLink
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   private fb = inject(FormBuilder).nonNullable;
@@ -39,12 +38,15 @@ export class LoginComponent {
   loading = signal<boolean>(false);
 
   loginForm = this.fb.group<LoginForm>({
-    email: this.fb.control('', [Validators.required, emailValidator()]),
+    email: this.fb.control('', {
+      validators: [Validators.required, emailValidator()],
+      updateOn: 'blur'
+    }),
     password: this.fb.control('', [Validators.required])
   });
 
   onSubmit(): void {
-    if (this.loginForm.invalid || this.loginForm.pending || this.loading()) {
+    if (this.blockSubmit()) {
       this.loginForm.markAllAsTouched();
       return;
     }
@@ -63,5 +65,9 @@ export class LoginComponent {
         this.loading.set(false);
       }
     });
+  }
+
+  private blockSubmit(): boolean {
+    return this.loginForm.invalid || this.loginForm.pending || this.loading();
   }
 }

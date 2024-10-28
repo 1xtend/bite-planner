@@ -32,6 +32,7 @@
       "uppercase": "At least one uppercase letter",
       "number": "At least one number"
     },
+    "takenUsername": "Username is taken",
     "auth/email-already-in-use": "Email is already in use",
     "auth/missing-email": "Missing email",
     "auth/invalid-credential": "Invalid email or password",

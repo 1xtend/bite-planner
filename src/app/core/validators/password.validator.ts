@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import {
   PASSWORD_NUMBER_REGEXP,
   PASSWORD_UPPERCASE_LETTER_REGEXP
@@ -11,7 +11,7 @@ interface PasswordErrors {
 }
 
 export function passwordValidator(): ValidatorFn {
-  return (control: AbstractControl) => {
+  return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     const errors: PasswordErrors = { password: {} };
 

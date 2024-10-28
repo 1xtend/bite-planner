@@ -23,7 +23,7 @@ import {
 import { LoginFormValue } from '../../shared/models/types/login-form-value.type';
 import { TokenService } from './token.service';
 import { User, UserCredential } from '@angular/fire/auth';
-import { doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { doc, Firestore, getDoc, writeBatch } from '@angular/fire/firestore';
 import { UserData } from '../../shared/models/interfaces/user-data.interface';
 import { HttpErrorService } from './http-error.service';
 import { FormGroup } from '@angular/forms';
@@ -73,6 +73,11 @@ export class AuthService {
     );
   }
 
+  findUsername(username: string): Observable<{ uid: string } | undefined> {
+    const usernameDoc = doc(this.fs, 'usernames', username);
+    return from(getDoc(usernameDoc)).pipe(take(1), map((document) => document.data() as { uid: string }));
+  }
+
   private createUser(username: string): OperatorFunction<UserCredential, any> {
     return (source: Observable<UserCredential>) => source.pipe(
       switchMap((credential) => from(updateProfile(credential.user, { displayName: username })).pipe(
@@ -80,17 +85,22 @@ export class AuthService {
       )),
       switchMap((credential) => {
         const { user } = credential;
-        const data: UserData = {
+        const batch = writeBatch(this.fs);
+
+        const userData: UserData = {
           uid: user.uid,
           displayName: user.displayName!,
           email: user.email!,
           photoURL: user.photoURL
         };
-
         const userDoc = doc(this.fs, 'users', user.uid);
-        return from(setDoc(userDoc, data)).pipe(
-          map(() => credential)
-        );
+        batch.set(userDoc, userData);
+
+        const usernameDoc = doc(this.fs, 'usernames', username);
+        const usernameData = { uid: user.uid };
+        batch.set(usernameDoc, usernameData);
+
+        return from(batch.commit()).pipe(map(() => credential));
       })
     );
   }

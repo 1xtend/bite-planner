@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,6 +19,7 @@ import { PasswordConditionsComponent } from '../../shared/components/password-co
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
+import { asyncUsernameValidator } from '../../core/validators/async-username.validator';
 
 @Component({
   selector: 'app-signup',
@@ -38,8 +39,7 @@ import { SignupFormValue } from '../../shared/models/types/signup-form-value.typ
     RouterLink
   ],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
   private fb = inject(FormBuilder).nonNullable;
@@ -49,13 +49,19 @@ export class SignupComponent {
   loading = signal<boolean>(false);
 
   signupForm = this.fb.group<SignupForm>({
-    username: this.fb.control('', [Validators.required, usernameValidator()]),
-    email: this.fb.control('', [Validators.required, emailValidator()]),
+    username: this.fb.control('', {
+      validators: [Validators.required, Validators.minLength(4), usernameValidator()],
+      asyncValidators: [asyncUsernameValidator(this.authService)]
+    }),
+    email: this.fb.control('', {
+      validators: [Validators.required, emailValidator()],
+      updateOn: 'blur'
+    }),
     password: this.fb.control('', [Validators.required, passwordValidator()])
   });
 
   onSubmit(): void {
-    if (this.signupForm.invalid || this.signupForm.pending || this.loading()) {
+    if (this.blockSubmit()) {
       this.signupForm.markAllAsTouched();
       return;
     }
@@ -73,5 +79,9 @@ export class SignupComponent {
         this.loading.set(false);
       }
     });
+  }
+
+  private blockSubmit(): boolean {
+    return this.signupForm.invalid || this.signupForm.pending || this.loading();
   }
 }

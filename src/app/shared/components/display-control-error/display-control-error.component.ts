@@ -12,5 +12,5 @@ import { TranslateModule } from '@ngx-translate/core';
 export class DisplayControlErrorComponent {
   control = input.required<AbstractControl>();
   showDefaultErrors = input<boolean>(true);
-  errors: string[] = ['email', 'username', 'required'];
+  errors: string[] = ['email', 'username', 'required', 'takenUsername'];
 }
