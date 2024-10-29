@@ -43,7 +43,7 @@ export class AuthService {
     shareReplay(1)
   );
 
-  signup({ email, password, username }: SignupFormValue, form?: FormGroup) {
+  signup({ email, password, username }: SignupFormValue, form?: FormGroup): Observable<User> {
     if (!username) {
       throw new Error('You must provide username to signup!');
     }

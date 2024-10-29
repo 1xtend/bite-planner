@@ -9,9 +9,6 @@ import { jwtDecode } from 'jwt-decode';
 export class TokenService {
   private cookieService = inject(CookieService);
 
-  constructor() {
-  }
-
   setToken(token: string): void {
     this.cookieService.set(LocalStorage.Token, token, { path: '/', secure: true });
   }
