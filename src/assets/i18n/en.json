@@ -16,6 +16,7 @@
   "auth": {
     "login": "Login",
     "signup": "Sign up",
+    "signout": "Sign out",
     "email": "Email",
     "password": "Password",
     "username": "Username",
@@ -23,16 +24,27 @@
     "new-user": "New to BitePlanner?"
   },
   "error": {
-    "email": "Please enter a valid email address.",
-    "required": "This field cannot be empty.",
-    "username": "Username contains invalid characters.",
+    "email": "Please enter a valid email address",
+    "required": "This field cannot be empty",
+    "usernameMinLength": "Username must have at least 4 characters",
+    "usernameInvalidCharacters": "Username contains invalid characters",
+    "usernameTaken": "Username is already taken",
     "password": {
-      "minlength": "At least 8 characters.",
-      "uppercase": "At least one uppercase letter.",
+      "minlength": "At least 8 characters",
+      "uppercase": "At least one uppercase letter",
       "number": "At least one number"
-    }
+    },
+    "auth/email-already-in-use": "Email is already in use",
+    "auth/missing-email": "Missing email",
+    "auth/invalid-credential": "Invalid email or password",
+    "auth/invalid-email": "Invalid email",
+    "auth/missing-password": "Missing password"
   },
   "locale": {
     "select-language": "Select language"
+  },
+  "sidebar": {
+    "change-language": "Change language",
+    "dark-theme": "Dark theme"
   }
 }

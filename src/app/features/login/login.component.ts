@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,7 +10,9 @@ import {
   DisplayControlErrorComponent
 } from '../../shared/components/display-control-error/display-control-error.component';
 import { PasswordInputComponent } from '../../shared/components/password-input/password-input.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { LoginFormValue } from '../../shared/models/types/login-form-value.type';
 
 @Component({
   selector: 'app-login',
@@ -26,23 +28,46 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   private fb = inject(FormBuilder).nonNullable;
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  loading = signal<boolean>(false);
 
   loginForm = this.fb.group<LoginForm>({
-    email: this.fb.control('', [Validators.required, emailValidator()]),
+    email: this.fb.control('', {
+      validators: [Validators.required, emailValidator()],
+      updateOn: 'blur'
+    }),
     password: this.fb.control('', [Validators.required])
-  }, { updateOn: 'blur' });
+  });
 
   onSubmit(): void {
-    if (this.loginForm.invalid) {
+    if (this.blockSubmit()) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    console.log(this.loginForm.getRawValue());
+    const value: LoginFormValue = this.loginForm.getRawValue();
+
+    this.loading.set(true);
+
+    this.authService.login(value, this.loginForm).subscribe({
+      next: () => {
+        this.loading.set(false);
+        this.loginForm.reset();
+        this.router.navigate(['/home']);
+      },
+      error: () => {
+        this.loading.set(false);
+      }
+    });
+  }
+
+  private blockSubmit(): boolean {
+    return this.loginForm.invalid || this.loginForm.pending || this.loading();
   }
 }

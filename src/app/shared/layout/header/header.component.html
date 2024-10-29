@@ -1,19 +1,16 @@
-@if (basicHeader$ | async) {
-  <header class="header">
-    <app-logo></app-logo>
+<header class="header">
+  <app-logo></app-logo>
 
-    <nav class="nav">
-      <app-language-switch></app-language-switch>
-      <app-theme-switch></app-theme-switch>
-    </nav>
-  </header>
-} @else {
-  <header class="header">
-    <app-logo></app-logo>
+  <div class="header__actions">
+    @if (showNavigation$ | async) {
+      @if (!(authenticated$ | async)) {
+        <div class="header__auth">
+          <p-button [label]="'auth.login' | translate" [outlined]="true" routerLink="/login"></p-button>
+          <p-button [label]="'auth.signup' | translate" routerLink="/signup"></p-button>
+        </div>
+      }
+    }
 
-    <nav class="nav">
-      <app-language-switch></app-language-switch>
-      <app-theme-switch></app-theme-switch>
-    </nav>
-  </header>
-}
+    <app-burger></app-burger>
+  </div>
+</header>

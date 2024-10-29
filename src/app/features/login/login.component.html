@@ -18,8 +18,19 @@
         <app-display-control-error [control]="loginForm.controls['password']"></app-display-control-error>
       </div>
 
+      @if (loginForm.errors?.['otherError']; as error) {
+        <div class="form__row">
+          <span class="text-red-500">{{ 'error.' + error | translate }}.</span>
+        </div>
+      }
+
       <div class="form__footer">
-        <p-button type="submit" [label]="'auth.login' | translate"></p-button>
+        <p-button
+          type="submit"
+          [label]="'auth.login' | translate"
+          [loading]="loading()"
+          [disabled]="loading()"
+        ></p-button>
       </div>
     </form>
   </p-card>

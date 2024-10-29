@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { ThemeSwitchComponent } from '../../components/theme-switch/theme-switch.component';
-import { distinctUntilChanged, filter, map } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
+import { map, Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { LanguageSwitchComponent } from '../../components/language-switch/language-switch.component';
+import { AuthService } from '../../../core/services/auth.service';
+import { BurgerComponent } from '../../components/burger/burger.component';
+import { BreakpointObserver } from '../../../core/services/breakpoint-observer.service';
 
 @Component({
   selector: 'app-header',
@@ -15,22 +16,20 @@ import { LanguageSwitchComponent } from '../../components/language-switch/langua
     LogoComponent,
     ButtonModule,
     TranslateModule,
-    ThemeSwitchComponent,
     AsyncPipe,
-    LanguageSwitchComponent
+    RouterLink,
+    BurgerComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-  private router = inject(Router);
+  private authService = inject(AuthService);
+  private breakpointObserver = inject(BreakpointObserver);
 
-  private basicHeaderRoutes: string[] = ['/login', '/signup'];
-
-  basicHeader$ = this.router.events.pipe(
-    filter((event) => event instanceof NavigationEnd),
-    map((event: any) => this.basicHeaderRoutes.includes(event.url)),
-    distinctUntilChanged()
+  authenticated$: Observable<boolean> = this.authService.authenticated$;
+  showNavigation$: Observable<boolean> = this.breakpointObserver.observe().pipe(
+    map((breakpoint) => breakpoint !== 'sm')
   );
 }

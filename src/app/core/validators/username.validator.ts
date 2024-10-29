@@ -1,13 +1,17 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { USERNAME_REGEXP } from '../../shared/helpers/username.rexeg';
 
 export function usernameValidator(): ValidatorFn {
-  return (control: AbstractControl) => {
-    const value = control.value;
-    if (!value) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const username = control.value;
+    if (!username) {
       return null;
     }
 
-    return USERNAME_REGEXP.test(value) ? null : { username: true };
+    if (username.length < 4) {
+      return { usernameMinLength: true };
+    }
+
+    return USERNAME_REGEXP.test(username) ? null : { usernameInvalidCharacters: true };
   };
 }
