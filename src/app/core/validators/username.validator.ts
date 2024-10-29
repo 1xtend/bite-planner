@@ -3,11 +3,15 @@ import { USERNAME_REGEXP } from '../../shared/helpers/username.rexeg';
 
 export function usernameValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    if (!value) {
+    const username = control.value;
+    if (!username) {
       return null;
     }
 
-    return USERNAME_REGEXP.test(value) ? null : { username: true };
+    if (username.length < 4) {
+      return { usernameMinLength: true };
+    }
+
+    return USERNAME_REGEXP.test(username) ? null : { usernameInvalidCharacters: true };
   };
 }

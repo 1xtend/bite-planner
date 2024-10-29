@@ -50,7 +50,7 @@ export class SignupComponent {
 
   signupForm = this.fb.group<SignupForm>({
     username: this.fb.control('', {
-      validators: [Validators.required, Validators.minLength(4), usernameValidator()],
+      validators: [Validators.required, usernameValidator()],
       asyncValidators: [asyncUsernameValidator(this.authService)]
     }),
     email: this.fb.control('', {

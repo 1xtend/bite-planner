@@ -26,13 +26,14 @@
   "error": {
     "email": "Please enter a valid email address",
     "required": "This field cannot be empty",
-    "username": "Username contains invalid characters",
+    "usernameMinLength": "Username must have at least 4 characters",
+    "usernameInvalidCharacters": "Username contains invalid characters",
+    "usernameTaken": "Username is already taken",
     "password": {
       "minlength": "At least 8 characters",
       "uppercase": "At least one uppercase letter",
       "number": "At least one number"
     },
-    "takenUsername": "Username is taken",
     "auth/email-already-in-use": "Email is already in use",
     "auth/missing-email": "Missing email",
     "auth/invalid-credential": "Invalid email or password",

@@ -67,9 +67,7 @@ export class AuthService {
   signout() {
     return from(signOut(this.auth)).pipe(
       first(),
-      tap(() => {
-        this.tokenService.deleteToken();
-      })
+      tap(() => this.tokenService.deleteToken())
     );
   }
 

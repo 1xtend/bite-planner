@@ -17,7 +17,7 @@ export function asyncUsernameValidator(authService: AuthService): AsyncValidator
     return authService.findUsername(username).pipe(
       take(1),
       catchError(() => of(null)),
-      map((username) => username ? { takenUsername: true } : null)
+      map((username) => username ? { usernameTaken: true } : null)
     );
   }
 
