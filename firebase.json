@@ -1,1 +1,10 @@
-{}
+{
+  "hosting": {
+    "public": "dist/bite-planner/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
