@@ -10,9 +10,6 @@ export class SidebarService {
 
   visible$ = this.visibleSubject.asObservable();
 
-  constructor() {
-  }
-
   show(): void {
     this.visibleSubject.next(true);
   }
