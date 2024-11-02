@@ -28,7 +28,7 @@ export class FormErrorService {
       return;
     }
 
-    if (!this.doesMapContainCode(code)) {
+    if (!this.doesErrorsMapContainCode(code)) {
       throw new Error('Provided code does not exist in type HttpErrorFieldCode');
     }
 
@@ -40,7 +40,7 @@ export class FormErrorService {
     }
   }
 
-  private doesMapContainCode(code: HttpErrorCode): code is HttpErrorFieldCode {
+  private doesErrorsMapContainCode(code: HttpErrorCode): code is HttpErrorFieldCode {
     return code in this.controlErrorsMap;
   }
 }
