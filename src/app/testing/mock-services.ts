@@ -3,13 +3,12 @@ import { Theme } from '../shared/models/types/theme.type';
 import { Language } from '../shared/models/types/language.type';
 import { mockDynamicDialogRef } from './test-helpers';
 import { TokenService } from '../core/services/token.service';
-import { HttpErrorService } from '../core/services/http-error.service';
 import { DialogManagerService } from '../core/services/dialog-manager.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LocaleService } from '../core/services/locale.service';
 import { ThemeService } from '../core/services/theme.service';
 import { AuthService } from '../core/services/auth.service';
-import { Auth, User, UserCredential } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 
 // ThemeService
@@ -62,5 +61,14 @@ export const mockTokenService = {
 // HttpErrorService
 export const mockHttpErrorService = {
   handleError: jest.fn()
-}
+};
 
+// NotificationService
+export const mockNotificationService = {
+  showMessage: jest.fn()
+};
+
+// FormErrorService
+export const mockFormErrorService = {
+  handleFormError: jest.fn()
+};

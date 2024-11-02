@@ -17,7 +17,6 @@ type ErrorsMap = {
 }
 
 interface HandleErrorByTypeOptions {
-  code: HttpErrorCode;
   type: ErrorType;
   options: HandleErrorOptions;
   form?: FormGroup;
@@ -44,7 +43,7 @@ export class HttpErrorService {
       catchError((error: HttpError) => {
         const type: ErrorType = this.classifyError(error);
 
-        return this.handleErrorByType({ code: error.code, type, options, form });
+        return this.handleErrorByType(error, { type, options, form });
       })
     );
   }
@@ -53,19 +52,24 @@ export class HttpErrorService {
     return this.errorsMap[error.code] || 'toast';
   }
 
-  private handleErrorByType({ code, type, options, form }: HandleErrorByTypeOptions): Observable<never> {
-    const text = `error.${ code }`;
+  private handleErrorByType(error: HttpError, { type, options, form }: HandleErrorByTypeOptions): Observable<never> {
+    const text = `error.${ error.code }`;
     const message = this.translateService.instant(text);
 
     if (type === 'toast') {
-      this.notificationService.showMessage(message, 'error', 7000);
+      this.notificationService.showMessage(message.includes('undefined') ? error.message : message, 'error', 7000);
     }
 
     if ((type === 'field' || type === 'other') && form) {
-      this.formErrorService.handleFormError(form, type, code, options);
+      this.formErrorService.handleFormError(form, type, error.code, options);
     }
 
-    const response: ErrorResponse = { code, type, message: text, translatedMessage: message };
+    const response: ErrorResponse = {
+      code: error.code,
+      type,
+      message: message.includes('undefined') ? error.message : message,
+      translatedMessage: message
+    };
     return throwError(() => response);
   }
 }

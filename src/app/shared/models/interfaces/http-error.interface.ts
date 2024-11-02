@@ -3,10 +3,10 @@ import { HttpErrorCode } from '../types/http-error-code.type';
 
 export interface HttpError {
   code: HttpErrorCode;
+  message: string;
 }
 
 export interface ErrorResponse extends HttpError {
   type: ErrorType;
-  message: string;
   translatedMessage: string;
 }
