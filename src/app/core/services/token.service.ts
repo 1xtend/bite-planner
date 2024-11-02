@@ -10,7 +10,7 @@ export class TokenService {
   private cookieService = inject(CookieService);
 
   setToken(token: string): void {
-    this.cookieService.set(LocalStorage.Token, token, { path: '/', secure: true });
+    this.cookieService.set(LocalStorage.Token, token, { path: '/', secure: true, sameSite: 'Lax' });
   }
 
   getToken(): string | null {
