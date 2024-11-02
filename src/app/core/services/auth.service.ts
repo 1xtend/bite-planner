@@ -9,14 +9,12 @@ import {
 } from '@angular/fire/auth';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
 import {
+  BehaviorSubject,
   distinctUntilChanged, first,
   from,
   map,
-  merge,
   Observable,
-  of,
   OperatorFunction,
-  shareReplay,
   switchMap, take,
   tap
 } from 'rxjs';
@@ -38,10 +36,27 @@ export class AuthService {
   private httpErrorService = inject(HttpErrorService);
 
   user$: Observable<User | null> = authState(this.auth);
-  authenticated$: Observable<boolean> = this.isAuthenticated().pipe(
-    distinctUntilChanged(),
-    shareReplay(1)
+  private authenticatedSubject = new BehaviorSubject<boolean>(this.isTokenValid());
+  authenticated$: Observable<boolean> = this.authenticatedSubject.asObservable().pipe(
+    distinctUntilChanged()
   );
+
+  authChanges(): Observable<User | null> {
+    return authState(this.auth).pipe(
+      tap(async (user) => {
+        const isTokenValid = this.isTokenValid();
+        if (user && !isTokenValid) {
+          await this.saveUserToken(user);
+        }
+
+        if (!user && isTokenValid) {
+          this.tokenService.deleteToken();
+        }
+
+        this.authenticatedSubject.next(!!user);
+      })
+    );
+  }
 
   signup({ email, password, username }: SignupFormValue, form?: FormGroup): Observable<User> {
     if (!username) {
@@ -105,22 +120,19 @@ export class AuthService {
 
   private saveToken(): OperatorFunction<UserCredential, User> {
     return (source: Observable<UserCredential>): Observable<User> => source.pipe(
-      switchMap(({ user }) => from(user.getIdToken()).pipe(
-        take(1),
-        map((token) => {
-          this.tokenService.setToken(token);
-          return user;
-        })))
+      switchMap(({ user }) => from(this.saveUserToken(user)).pipe(
+        map(() => user)
+      ))
     );
   }
 
-  private isAuthenticated(): Observable<boolean> {
-    const token = this.tokenService.getToken();
-    const isTokenValid = token ? this.tokenService.isTokenExpired(token) : false;
+  private async saveUserToken(user: User): Promise<void> {
+    const token = await user.getIdToken();
+    this.tokenService.setToken(token);
+  }
 
-    return merge(
-      of(isTokenValid),
-      this.user$.pipe(map((user) => !!user))
-    );
+  private isTokenValid(): boolean {
+    const token = this.tokenService.getToken();
+    return token ? !this.tokenService.isTokenExpired(token) : false;
   }
 }

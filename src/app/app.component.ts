@@ -1,10 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { ThemeService } from './core/services/theme.service';
 import { LocaleService } from './core/services/locale.service';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
 import { ToastModule } from 'primeng/toast';
+import { AuthService } from './core/services/auth.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,11 @@ import { ToastModule } from 'primeng/toast';
 export class AppComponent implements OnInit {
   private themeService = inject(ThemeService);
   private localeService = inject(LocaleService);
+  private authService = inject(AuthService);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
+    this.authChanges();
     this.setSavedTheme();
     this.setSavedLanguage();
   }
@@ -30,5 +35,9 @@ export class AppComponent implements OnInit {
   private setSavedLanguage(): void {
     const language = this.localeService.getSavedLanguage();
     this.localeService.setLanguage(language);
+  }
+
+  private authChanges(): void {
+    this.authService.authChanges().pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }

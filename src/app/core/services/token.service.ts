@@ -23,8 +23,6 @@ export class TokenService {
 
   isTokenExpired(token: string): boolean {
     const decodedToken = jwtDecode(token);
-    const currentTime = Math.floor(Date.now() * 1000);
-
-    return decodedToken.exp ? decodedToken.exp < currentTime : false;
+    return decodedToken.exp ? decodedToken.exp * 1000 < Date.now() : true;
   }
 }
