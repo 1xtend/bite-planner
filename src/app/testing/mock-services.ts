@@ -72,3 +72,8 @@ export const mockNotificationService = {
 export const mockFormErrorService = {
   handleFormError: jest.fn()
 };
+
+// MessageService
+export const mockMessageService = {
+  add: jest.fn()
+};
