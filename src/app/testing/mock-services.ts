@@ -8,7 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { LocaleService } from '../core/services/locale.service';
 import { ThemeService } from '../core/services/theme.service';
 import { AuthService } from '../core/services/auth.service';
-import { Auth } from '@angular/fire/auth';
+import { Auth, User } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 
 // ThemeService
@@ -20,7 +20,8 @@ export const mockThemeService = {
 
 // AuthService
 export const mockAuthService = {
-  user$: of({})
+  user$: of({}),
+  login: jest.fn(() => of(<User>{ uid: 'test-id', email: 'test@gmail.com' }))
 } as unknown as jest.Mocked<AuthService>;
 
 // Firebase

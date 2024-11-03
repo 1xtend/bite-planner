@@ -52,7 +52,6 @@ export class LoginComponent {
     }
 
     const value: LoginFormValue = this.loginForm.getRawValue();
-
     this.loading.set(true);
 
     this.authService.login(value, this.loginForm).subscribe({
