@@ -13,6 +13,7 @@ import { PasswordInputComponent } from '../../shared/components/password-input/p
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { LoginFormValue } from '../../shared/models/types/login-form-value.type';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -54,15 +55,12 @@ export class LoginComponent {
     const value: LoginFormValue = this.loginForm.getRawValue();
     this.loading.set(true);
 
-    this.authService.login(value, this.loginForm).subscribe({
-      next: () => {
-        this.loading.set(false);
-        this.loginForm.reset();
-        this.router.navigate(['/home']);
-      },
-      error: () => {
-        this.loading.set(false);
-      }
+    this.authService.login(value, this.loginForm).pipe(
+      finalize(() => this.loading.set(false))
+    ).subscribe(() => {
+      this.loading.set(false);
+      this.loginForm.reset();
+      this.router.navigate(['/home']);
     });
   }
 

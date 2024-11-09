@@ -20,6 +20,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { SignupFormValue } from '../../shared/models/types/signup-form-value.type';
 import { asyncUsernameValidator } from '../../core/validators/async-username.validator';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -69,15 +70,11 @@ export class SignupComponent {
     const value: SignupFormValue = this.signupForm.getRawValue();
     this.loading.set(true);
 
-    this.authService.signup(value, this.signupForm).subscribe({
-      next: () => {
-        this.loading.set(false);
-        this.signupForm.reset();
-        this.router.navigate(['/home']);
-      },
-      error: () => {
-        this.loading.set(false);
-      }
+    this.authService.signup(value, this.signupForm).pipe(
+      finalize(() => this.loading.set(false))
+    ).subscribe(() => {
+      this.signupForm.reset();
+      this.router.navigate(['/home']);
     });
   }
 

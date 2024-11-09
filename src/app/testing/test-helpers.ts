@@ -23,11 +23,11 @@ export function testEmailControl(control: FormControl): void {
 
 export function testUsernameControl(control: FormControl): void {
   testControlValidity(control, '', false, { required: true });
-  testControlValidity(control, ' ', false, { username: true });
-  testControlValidity(control, 'invalid username', false, { username: true });
-  testControlValidity(control, 'invalid@username', false, { username: true });
-  testControlValidity(control, 'invalid*username', false, { username: true });
-  testControlValidity(control, 'invalid%username', false, { username: true });
+  testControlValidity(control, 'd', false, { usernameMinLength: true });
+  testControlValidity(control, 'invalid username', false, { usernameInvalidCharacters: true });
+  testControlValidity(control, 'invalid@username', false, { usernameInvalidCharacters: true });
+  testControlValidity(control, 'invalid*username', false, { usernameInvalidCharacters: true });
+  testControlValidity(control, 'invalid%username', false, { usernameInvalidCharacters: true });
   testControlValidity(control, 'valid_username', true);
   testControlValidity(control, 'user.name', true);
   testControlValidity(control, 'user-name', true);

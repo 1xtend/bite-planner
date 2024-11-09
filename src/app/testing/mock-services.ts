@@ -21,7 +21,8 @@ export const mockThemeService = {
 // AuthService
 export const mockAuthService = {
   user$: of({}),
-  login: jest.fn(() => of(<User>{ uid: 'test-id', email: 'test@gmail.com' }))
+  login: jest.fn(() => of(<User>{ uid: 'test-id', email: 'test@gmail.com' })),
+  signup: jest.fn(() => of(<User>{ uid: 'test-id', email: 'test@gmail.com' }))
 } as unknown as jest.Mocked<AuthService>;
 
 // Firebase
@@ -77,4 +78,9 @@ export const mockFormErrorService = {
 // MessageService
 export const mockMessageService = {
   add: jest.fn()
+};
+
+// SidebarService
+export const mockSidebarService = {
+  show: jest.fn()
 };
